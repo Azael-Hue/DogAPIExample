@@ -2,7 +2,9 @@ class RandomImageResponse {
 }
 document.addEventListener("DOMContentLoaded", function () {
     let randomDogButton = document.getElementById("random_image");
-    randomDogButton.addEventListener("click", getRandomDogImage);
+    randomDogButton.addEventListener("click", function () {
+        getRandomDogImage().then(displayDogImage).catch(displayError);
+    });
 });
 async function getRandomDogImage() {
     let response = await fetch("https://dog.ceo/api/breeds/image/random");
@@ -15,8 +17,12 @@ async function getRandomDogImage() {
     console.log(data);
     return data;
 }
-getRandomDogImage().then(displayDogImage).catch(displayError);
-function displayDogImage() {
+function displayDogImage(dogData) {
+    let displayDiv = document.getElementById("Display");
+    let img = document.createElement("img");
+    img.src = dogData.message;
+    img.style.width = "300px";
+    displayDiv.insertBefore(img, displayDiv.firstChild);
 }
-function displayError() {
+function displayError(error) {
 }
