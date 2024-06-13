@@ -71,3 +71,16 @@
         function displayError(error:Error){
             // Todo: display nice error message to user
         }
+
+        /**
+         * This function returns the breed name portion fo the URL
+         * from the random dog image response Example URL:
+         * https://images.dog.ceo/breeds/weimaraner/n02092339_114.jpg
+         * @param url the URL pointing to a dog image
+         * @returns the breed name portion of the URL
+         */
+        function getDogBreed(url: string): string {
+            let parts = url.split("/");
+            let breedIndex = parts.indexOf("breeds") + 1;
+            return parts[breedIndex];
+        }
