@@ -57,15 +57,25 @@
             // Todo: display image on page
             let displayDiv = document.getElementById("Display");
 
-            // Create an image element in memory
-            let img = document.createElement("img");
-            img.src = dogData.message;
-            
-            // Use CSS to resize the image
-            img.style.width = "300px";
+            let breedName = getDogBreed(dogData.message);
+
+            // Create a Bootstrap card component with an image cap
+            let card =
+            `<div class="card" style="width: 18rem;">
+                <img src="${dogData.message}" class="card-img-top" alt="${breedName}">
+                <div class="card-body">
+                    <h5 class="card-title">${breedName}</h5>
+                    <p class="card-text"> Example picture of a ${breedName} </p>
+                    <a href="${dogData.message}" target="_blank" class="btn btn-primary">See full image</a>
+                </div>
+            </div>`;
+
+            let container = document.createElement("div"); // Create an element to hold the card
+            container.classList.add("col"); // Add the Bootstrap class to the container
+            container.innerHTML = card; // Add the card to the container
 
             // Add image as the first child of the display div but keep the previous images
-            displayDiv.insertBefore(img, displayDiv.firstChild); // Insert the new image before the current first image
+            displayDiv.insertBefore(container, displayDiv.firstChild); // Insert the new image before the current first image
         }
         
         function displayError(error:Error){
